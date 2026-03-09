@@ -1,17 +1,17 @@
 import re
 
 NUTRIENT_ALIASES = {
-    "energy_kcal":      ["energy"],
-    "protein_g":        ["protein", "orotein", "total protein"],
-    "carbohydrates_g":  ["carbohydrate"],
-    "sugar_g":          ["total sugars", "cotal sugars", "- total sugars", "sugars (g)"],
-    "added_sugar_g":    ["added sugars", "- added sugars"],
-    "dietary_fiber_g":  ["dietary fibre", "dietary fiber", "- dietary fibre", "- dietary fiber"],
-    "total_fat_g":      ["total fat", "otal fat"],
-    "saturated_fat_g":  ["saturated fat", "saturated fatty", "- saturated"],
-    "trans_fat_g":      ["trans fat", "trans fats", "- trans"],
-    "sodium_mg":        ["sodium"],
-    "cholesterol_mg":   ["cholesterol"],
+    "energy_kcal":      ["energy", "ऊर्जा", "urja", "कैलोरी", "calorie", "ஆற்றல்", "arul"],
+    "protein_g":        ["protein", "orotein", "total protein", "प्रोटीन", "protein hindi", "புரதம்", "puratham"],
+    "carbohydrates_g":  ["carbohydrate", "कार्बोहाइड्रेट", "carbohydrate hindi", "கார்போஹைட்ரேட்", "karbohidrate"],
+    "sugar_g":          ["total sugars", "cotal sugars", "- total sugars", "sugars (g)", "चीनी", "cheeni", "शक्कर", "shakkar", "சர்க்கரை", "sarkkarai"],
+    "added_sugar_g":    ["added sugars", "- added sugars", "added cheeni", "சேர்க்கப்பட்ட சர்க்கரை"],
+    "dietary_fiber_g":  ["dietary fibre", "dietary fiber", "- dietary fibre", "- dietary fiber", "फाइबर", "fiber hindi", "रेशा", "resha", "நார்ச்சத்து", "narchatru", "இழைச்சத்து", "izhaichatru"],
+    "total_fat_g":      ["total fat", "otal fat", "वसा", "vasa", "फैट", "fat hindi", "கொழுப்பு", "koluppu"],
+    "saturated_fat_g":  ["saturated fat", "saturated fatty", "- saturated", "संतृप्त वसा", "santrupt vasa", "நிறைவுற்ற கொழுப்பு", "niraivurra koluppu"],
+    "trans_fat_g":      ["trans fat", "trans fats", "- trans", "ट्रांस फैट", "trans fat hindi", "டிரான்ஸ் கொழுப்பு", "trans koluppu"],
+    "sodium_mg":        ["sodium", "सोडियम", "sodium hindi", "சோடியம்", "sodium tamil"],
+    "cholesterol_mg":   ["cholesterol", "कोलेस्ट्रॉल", "cholesterol hindi", "கொலஸ்ட்ரால்", "kolastral"],
 }
 
 def match_nutrient(text):
