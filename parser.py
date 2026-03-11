@@ -69,52 +69,61 @@ NUTRIENT_ALIASES = {
     "energy_kcal": [
         "energy", "energy (kcal)", "energy (kcal #)", "calories", "calorie",
         "energy kcal", "energy(kcal)", "cal",
+        "ऊर्जा", "ஆற்றல்",
     ],
     "protein_g": [
         "protein", "protein (g)", "total protein", "crude protein",
         "orotein",  # common PaddleOCR misread
+        "प्रोटीन", "புரதம்",
     ],
     "carbohydrates_g": [
         "carbohydrate", "carbohydrates", "total carbohydrate",
         "total carbohydrates", "carbs", "carbohydrate (g)",
+        "कार्बोहाइड्रेट", "कार्बोहाइड्रेट्स", "கார்போஹைட்ரேட்",
     ],
     "sugar_g": [
         "sugars", "sugar", "total sugars", "total sugar",
         "of which sugars", "-total sugars", "- total sugars",
         "total sugars^", "cotal sugars", "cotal sugars (g)",
+        "चीनी", "शर्करा", "कुल शर्करा", "சர்க்கரை", "மொத்த சர்க்கரை",
     ],
     "added_sugar_g": [
         "added sugars", "added sugar", "-added sugars", "- added sugars",
         "added sugars^",
+        "अतिरिक्त शर्करा", "जोड़ी गई चीनी", "சேர்க்கப்பட்ட சர்க்கரை",
     ],
     "total_fat_g": [
         "fat", "total fat", "total fat (g)", "fat (g)",
         "otal fat",  # PaddleOCR drops leading t
+        "वसा", "कुल वसा", "மொத்த கொழுப்பு",
     ],
     "saturated_fat_g": [
         "saturated fat", "saturated", "sat fat",
         "-saturated fat", "- saturated fat",
         "saturated fat (g)", "saturated fatty acid",
         "saturated fatty acids",
+        "संतृप्त वसा", "செறிவூட்டப்பட்ட கொழுப்பு",
     ],
     "trans_fat_g": [
         "trans fat", "trans fatty acid", "trans fat (g)",
         "- trans fat", "-trans fat", "trans fatty acids",
+        "ट्रांस वसा", "டிரான்ஸ் கொழுப்பு",
     ],
     "dietary_fiber_g": [
         "dietary fibre", "dietary fiber", "fibre", "fiber",
         "dietary fibre (g)", "total fibre",
+        "आहार रेशा", "फाइबर", "நார்ச்சத்து", "உணவுநார்",
     ],
-    "sodium_mg": ["sodium", "sodium (mg)", "sodium*"],
-    "cholesterol_mg": ["cholesterol", "cholesterol (mg)", "cholesterol^"],
-    "calcium_mg":   ["calcium", "calcium (mg)"],
-    "iron_mg":      ["iron", "iron (mg)"],
-    "potassium_mg": ["potassium", "potassium (mg)"],
+    "sodium_mg": ["sodium", "sodium (mg)", "sodium*", "सोडियम", "சோடியம்"],
+    "cholesterol_mg": ["cholesterol", "cholesterol (mg)", "cholesterol^", "कोलेस्ट्रॉल", "கொலஸ்ட்ரால்"],
+    "calcium_mg": ["calcium", "calcium (mg)", "कैल्शियम", "கால்சியம்"],
+    "iron_mg": ["iron", "iron (mg)", "लौह", "இரும்பு"],
+    "potassium_mg": ["potassium", "potassium (mg)", "पोटैशियम", "பொட்டாசியம்"],
 }
 
 _ALIAS_MAP: dict[str, str] = {}
 for _canon, _aliases in NUTRIENT_ALIASES.items():
-    for _alias in _aliases:
+    for _alias in dict.fromkeys(_aliases):
         _ALIAS_MAP[_alias.lower().strip()] = _canon
 
 
