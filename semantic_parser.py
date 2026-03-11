@@ -20,13 +20,17 @@ NUTRIENT_ALIASES = {
     "cholesterol_mg": ["cholesterol", "कोलेस्ट्रॉल", "கொலஸ்ட்ரால்"],
 }
 
+_ALIAS_MAP = {}
+for _canon, _aliases in NUTRIENT_ALIASES.items():
+    for _alias in dict.fromkeys(_aliases):
+        _ALIAS_MAP[_alias.lower().strip()] = _canon
+
+
 def match_nutrient(text):
-    t = text.lower()
-    for canon, aliases in NUTRIENT_ALIASES.items():
-        for a in aliases:
-            if a in t:
-                return canon
-    return None
+    t = re.sub(r'[\*\^†#•]+$', '', text.lower().strip())
+    t = re.sub(r'\s*(g|mg|kcal|kj|%)\s*$', '', t).strip()
+    t = re.sub(r'\s+', ' ', t)
+    return _ALIAS_MAP.get(t)
 
 
 def extract_number(text):
