@@ -1,26 +1,36 @@
 import re
 
 NUTRIENT_ALIASES = {
-    "energy_kcal":      ["energy"],
-    "protein_g":        ["protein", "orotein", "total protein"],
-    "carbohydrates_g":  ["carbohydrate"],
-    "sugar_g":          ["total sugars", "cotal sugars", "- total sugars", "sugars (g)"],
-    "added_sugar_g":    ["added sugars", "- added sugars"],
-    "dietary_fiber_g":  ["dietary fibre", "dietary fiber", "- dietary fibre", "- dietary fiber"],
-    "total_fat_g":      ["total fat", "otal fat"],
-    "saturated_fat_g":  ["saturated fat", "saturated fatty", "- saturated"],
-    "trans_fat_g":      ["trans fat", "trans fats", "- trans"],
-    "sodium_mg":        ["sodium"],
-    "cholesterol_mg":   ["cholesterol"],
+    "energy_kcal": ["energy", "ऊर्जा", "ஆற்றல்"],
+    "protein_g": ["protein", "orotein", "total protein", "प्रोटीन", "புரதம்"],
+    "carbohydrates_g": ["carbohydrate", "कार्बोहाइड्रेट", "कार्बोहाइड्रेट्स", "கார்போஹைட்ரேட்"],
+    "sugar_g": [
+        "total sugars", "cotal sugars", "- total sugars", "sugars (g)",
+        "चीनी", "शर्करा", "कुल शर्करा", "சர்க்கரை", "மொத்த சர்க்கரை",
+    ],
+    "added_sugar_g": ["added sugars", "- added sugars", "अतिरिक्त शर्करा", "जोड़ी गई चीनी", "சேர்க்கப்பட்ட சர்க்கரை"],
+    "dietary_fiber_g": [
+        "dietary fibre", "dietary fiber", "- dietary fibre", "- dietary fiber",
+        "आहार रेशा", "फाइबर", "நார்ச்சத்து", "உணவுநார்",
+    ],
+    "total_fat_g": ["total fat", "otal fat", "वसा", "कुल वसा", "மொத்த கொழுப்பு"],
+    "saturated_fat_g": ["saturated fat", "saturated fatty", "- saturated", "संतृप्त वसा", "செறிவூட்டப்பட்ட கொழுப்பு"],
+    "trans_fat_g": ["trans fat", "trans fats", "- trans", "ट्रांस वसा", "டிரான்ஸ் கொழுப்பு"],
+    "sodium_mg": ["sodium", "सोडियम", "சோடியம்"],
+    "cholesterol_mg": ["cholesterol", "कोलेस्ट्रॉल", "கொலஸ்ட்ரால்"],
 }
 
+_ALIAS_MAP = {}
+for _canon, _aliases in NUTRIENT_ALIASES.items():
+    for _alias in dict.fromkeys(_aliases):
+        _ALIAS_MAP[_alias.lower().strip()] = _canon
+
+
 def match_nutrient(text):
-    t = text.lower()
-    for canon, aliases in NUTRIENT_ALIASES.items():
-        for a in aliases:
-            if a in t:
-                return canon
-    return None
+    t = re.sub(r'[\*\^†#•]+$', '', text.lower().strip())
+    t = re.sub(r'\s*(g|mg|kcal|kj|%)\s*$', '', t).strip()
+    t = re.sub(r'\s+', ' ', t)
+    return _ALIAS_MAP.get(t)
 
 
 def extract_number(text):
